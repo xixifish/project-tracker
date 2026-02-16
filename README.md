@@ -15,9 +15,9 @@ A lightweight project management tool for small teams to organize tasks, track p
 - pnpm
 
 ### Run Locally
-# SSH
+**SSH**
 git clone git@github.com:xixifish/project-tracker.git
-# or HTTPS
+**or HTTPS**
 git clone https://github.com/xixifish/project-tracker.git
 
 cd project-tracker
@@ -27,19 +27,21 @@ pnpm run dev
 Open http://localhost:3000
 
 ## Project Structure
+```
 src/
   ├── app/          # Pages and layouts (App Router)
   ├── components/   # Reusable UI components
   └── data/         # Types and mock data (replaced by DB later)
+```
 
 ## Features
-- [] Responsive sidebar navigation
-- [] Kanban board with columns (To Do, In Progress, Done)
-- [] Drag and drop cards between cards
-- [] Create / edit / delete cards
-- [] User authentication
-- [] Real-time collaboration
-- [] Dashboard with project analytics
+- [ ] Responsive sidebar navigation
+- [ ] Kanban board with columns (To Do, In Progress, Done)
+- [ ] Drag and drop cards between cards
+- [ ] Create / edit / delete cards
+- [ ] User authentication
+- [ ] Real-time collaboration
+- [ ] Dashboard with project analytics
 
 ## Roadmap
 - **Week 1** - UI foundation: layout, kanban board, drag-and-drop
