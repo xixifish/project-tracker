@@ -36,8 +36,8 @@ src/
 
 ## Features
 - [ ] Responsive sidebar navigation
-- [ ] Kanban board with columns (To Do, In Progress, Done)
-- [ ] Drag and drop cards between cards
+- [x] Kanban board with columns (To Do, In Progress, Done)
+- [x] Drag and drop cards between cards
 - [ ] Create / edit / delete cards
 - [ ] User authentication
 - [ ] Real-time collaboration
