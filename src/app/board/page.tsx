@@ -71,6 +71,33 @@ export default function Page() {
     }
   };
 
+  function addTask(taskContent: string, columnId: string) {
+    const newTask: Task = {
+      id: crypto.randomUUID(),
+      content: taskContent,
+    };
+    const newTaskIds = [...board.columns[columnId].taskIds];
+    newTaskIds.push(newTask.id);
+
+    const newColumn = {
+      ...board.columns[columnId],
+      taskIds: newTaskIds,
+    };
+
+    const newColumns = {
+      ...board.columns,
+      [columnId]: newColumn,
+    };
+
+    const newTasks: Record<string, Task> = {
+      ...board.tasks,
+      [newTask.id]: newTask,
+    };
+
+    const newState = { ...board, columns: newColumns, tasks: newTasks };
+    setBoard(newState);
+  }
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="flex gap-1 h-screen">
@@ -80,7 +107,14 @@ export default function Page() {
             (taskId) => board.tasks[taskId],
           );
 
-          return <Column key={column.id} column={column} tasks={tasks} />;
+          return (
+            <Column
+              key={column.id}
+              column={column}
+              tasks={tasks}
+              addTask={addTask}
+            />
+          );
         })}
       </div>
     </DragDropContext>
