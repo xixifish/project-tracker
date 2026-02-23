@@ -1,4 +1,4 @@
-import { Task, ColumnType, StateData } from "../types/types";
+import { StateData } from "../types/types";
 
 export const state_data: StateData = {
   tasks: {
@@ -8,6 +8,8 @@ export const state_data: StateData = {
     "task-4": { id: "task-4", content: "Cook dinner" },
     "task-5": { id: "task-5", content: "Do laundry" },
     "task-6": { id: "task-6", content: "Prepare tomorrow's lunchbox" },
+    "task-7": { id: "task-7", content: "Make tea" },
+    "task-8": { id: "task-8", content: "Make yoghurt" },
   },
   columns: {
     "column-1": {
@@ -20,6 +22,11 @@ export const state_data: StateData = {
       title: "In progress",
       taskIds: ["task-5", "task-6"],
     },
+    "column-3": {
+      id: "column-3",
+      title: "Done",
+      taskIds: ["task-7", "task-8"],
+    },
   },
-  columnOrder: ["column-1", "column-2"],
+  columnOrder: ["column-1", "column-2", "column-3"],
 };
