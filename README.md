@@ -43,6 +43,12 @@ src/
 - [ ] Real-time collaboration
 - [ ] Dashboard with project analytics
 
+### User Interactions
+**Edit task**
+1. User's mouse hovers on the card, then it shows edit and delete button. 
+2. User clicks the edit button, and then the task content text changes to inline input box with save and cancel button. (ensure same mental model as adding task)
+3. 
+
 ## Roadmap
 - **Week 1** - UI foundation: layout, kanban board, drag-and-drop
 - **Week 2** - Database + auth (Supabase), CRUD operations
