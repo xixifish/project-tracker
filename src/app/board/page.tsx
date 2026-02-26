@@ -98,6 +98,28 @@ export default function Page() {
     setBoard(newState);
   }
 
+  function deleteTask(columnId: string, taskId: string) {
+    // Remove the task from the taskIds of the column
+    const newTaskIds = [...board.columns[columnId].taskIds];
+    const delete_idx = newTaskIds.indexOf(taskId);
+    newTaskIds.splice(delete_idx, 1);
+    // Set new sub objects of the board state
+    const newColumn = {
+      ...board.columns[columnId],
+      taskIds: newTaskIds,
+    };
+
+    const newColumns = {
+      ...board.columns,
+      [columnId]: newColumn,
+    };
+
+    const { [taskId]: _deletedTask, ...newTasks } = { ...board.tasks };
+
+    const newState = { ...board, columns: newColumns, tasks: newTasks };
+    setBoard(newState);
+  }
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="flex gap-1 h-screen">
@@ -113,6 +135,7 @@ export default function Page() {
               column={column}
               tasks={tasks}
               addTask={addTask}
+              deleteTask={deleteTask}
             />
           );
         })}

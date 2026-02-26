@@ -7,11 +7,21 @@ type ColumnProps = {
   column: ColumnType;
   tasks: Task[];
   addTask: (taskContent: string, columnId: string) => void;
+  deleteTask: (columnId: string, taskId: string) => void;
 };
 
-export default function Column({ column, tasks, addTask }: ColumnProps) {
+export default function Column({
+  column,
+  tasks,
+  addTask,
+  deleteTask,
+}: ColumnProps) {
   const [taskContent, setTaskContent] = useState("");
   const [formIsOpen, setFormIsOpen] = useState(false);
+
+  function deleteTaskInColumn(taskId: string) {
+    deleteTask(column.id, taskId);
+  }
 
   return (
     <div className="flex-1 bg-orange-100 p-2">
@@ -28,7 +38,12 @@ export default function Column({ column, tasks, addTask }: ColumnProps) {
           >
             {tasks.map((task, index) => (
               <li key={task.id}>
-                <Card key={task.id} task={task} index={index} />
+                <Card
+                  key={task.id}
+                  task={task}
+                  index={index}
+                  deleteTaskInColumn={deleteTaskInColumn}
+                />
               </li>
             ))}
             {provided.placeholder}

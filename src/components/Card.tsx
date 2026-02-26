@@ -4,9 +4,10 @@ import { Task } from "../types/types";
 type CardProps = {
   task: Task;
   index: number;
+  deleteTaskInColumn: (taskId: string) => void;
 };
 
-export default function Card({ task, index }: CardProps) {
+export default function Card({ task, index, deleteTaskInColumn }: CardProps) {
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided, snapshot) => (
@@ -16,7 +17,8 @@ export default function Card({ task, index }: CardProps) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          {task.content}
+          <div>{task.content}</div>
+          <button onClick={() => deleteTaskInColumn(task.id)}>Delete</button>
         </div>
       )}
     </Draggable>
