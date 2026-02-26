@@ -98,6 +98,20 @@ export default function Page() {
     setBoard(newState);
   }
 
+  function editTask(taskId: string, taskContent: string) {
+    const updatedTask: Task = {
+      id: taskId,
+      content: taskContent,
+    };
+
+    const newTasks: Record<string, Task> = {
+      ...board.tasks,
+      [taskId]: updatedTask,
+    };
+    const newState = { ...board, tasks: newTasks };
+    setBoard(newState);
+  }
+
   function deleteTask(columnId: string, taskId: string) {
     // Remove the task from the taskIds of the column
     const newTaskIds = [...board.columns[columnId].taskIds];
@@ -135,6 +149,7 @@ export default function Page() {
               column={column}
               tasks={tasks}
               addTask={addTask}
+              editTask={editTask}
               deleteTask={deleteTask}
             />
           );

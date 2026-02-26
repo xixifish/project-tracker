@@ -14,6 +14,7 @@ export default function Column({
   column,
   tasks,
   addTask,
+  editTask,
   deleteTask,
 }: ColumnProps) {
   const [taskContent, setTaskContent] = useState("");
@@ -27,7 +28,7 @@ export default function Column({
     <div className="flex-1 bg-orange-100 p-2">
       <h1 className="text-2xl font-bold">{column.title}</h1>
       <Droppable droppableId={column.id}>
-        {(provided, snapshot) => (
+        {(provided, _snapshot) => (
           <ul
             className="flex flex-col gap-2"
             ref={provided.innerRef}
@@ -42,6 +43,7 @@ export default function Column({
                   key={task.id}
                   task={task}
                   index={index}
+                  editTask={editTask}
                   deleteTaskInColumn={deleteTaskInColumn}
                 />
               </li>
