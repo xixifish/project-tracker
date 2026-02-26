@@ -8,6 +8,7 @@ type ColumnProps = {
   tasks: Task[];
   addTask: (taskContent: string, columnId: string) => void;
   deleteTask: (columnId: string, taskId: string) => void;
+  editTask: (taskId: string, taskContent: string) => void;
 };
 
 export default function Column({

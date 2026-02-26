@@ -30,14 +30,16 @@ export default function Card({
           {...provided.dragHandleProps}
         >
           {isEditing ? (
-            <div>
+            <div className="flex-col bg-amber-300 mt-2 p-2">
               <input
                 type="text"
                 onChange={(e) => setTaskContent(e.target.value)}
                 value={taskContent}
+                className="bg-white w-full"
               />
-              <div>
+              <div className="flex">
                 <button
+                  className="flex-1"
                   onClick={() => {
                     editTask(task.id, taskContent);
                     setIsEditing(false);
@@ -46,6 +48,7 @@ export default function Card({
                   Save
                 </button>
                 <button
+                  className="flex-1"
                   onClick={() => {
                     setIsEditing(false);
                     setTaskContent(task.content);
