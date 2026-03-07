@@ -50,7 +50,8 @@ prisma/
 - [x] Kanban board with columns (To Do, In Progress, Done)
 - [x] Drag and drop cards between columns
 - [x] Create / edit / delete cards
-- [ ] Persist data to database
+- [x] Persist data to database (Prisma + Neon)
+- [x] Optimistic UI updates for snappy interactions
 - [ ] User authentication
 - [ ] Dashboard with project analytics
 
@@ -71,7 +72,7 @@ prisma/
 ## Roadmap
 - **Stage 1** - UI foundation: layout, kanban board, drag-and-drop ✅
 - **Stage 2** - CRUD operations: add, edit, delete tasks ✅
-- **Stage 3** - Database persistence: Prisma + Neon, Server Actions
+- **Stage 3** - Database persistence: Prisma + Neon, Server Actions ✅
 - **Stage 4** - Dashboard with task analytics
 - **Stage 5** - User authentication (Clerk)
 - **Stage 6** - Deployment to Vercel
