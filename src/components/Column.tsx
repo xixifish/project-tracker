@@ -6,9 +6,17 @@ import { useState } from "react";
 type ColumnProps = {
   column: ColumnType;
   tasks: Task[];
-  addTask: (taskContent: string, columnId: string) => void;
+  addTask: (
+    taskContent: string,
+    columnId: string,
+    taskDueDate: Date | null,
+  ) => void;
   deleteTask: (columnId: string, taskId: string) => void;
-  editTask: (taskId: string, taskContent: string) => void;
+  editTask: (
+    taskId: string,
+    taskContent: string,
+    taskDueDate: Date | null,
+  ) => void;
 };
 
 export default function Column({
@@ -19,6 +27,8 @@ export default function Column({
   deleteTask,
 }: ColumnProps) {
   const [taskContent, setTaskContent] = useState("");
+  // When the taskDueDate is empty, new Date("") can generate correct type
+  const [taskDueDate, setTaskDueDate] = useState("");
   const [formIsOpen, setFormIsOpen] = useState(false);
 
   function deleteTaskInColumn(taskId: string) {
@@ -58,9 +68,14 @@ export default function Column({
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              addTask(taskContent, column.id);
+              addTask(
+                taskContent,
+                column.id,
+                taskDueDate ? new Date(taskDueDate) : null,
+              );
               setFormIsOpen(false);
               setTaskContent("");
+              setTaskDueDate("");
             }}
             className="flex-col bg-amber-300 mt-2 p-2"
           >
@@ -70,6 +85,12 @@ export default function Column({
               onChange={(e) => setTaskContent(e.target.value)}
               className="bg-white w-full"
             />
+            <input
+              type="date"
+              value={taskDueDate}
+              onChange={(e) => setTaskDueDate(e.target.value)}
+              className="bg-white w-full"
+            />
             <div className="flex">
               <button type="submit" className="flex-1">
                 Save
@@ -77,7 +98,10 @@ export default function Column({
               <button
                 type="button"
                 className="flex-1"
-                onClick={() => setFormIsOpen(false)}
+                onClick={() => {
+                  setFormIsOpen(false);
+                  setTaskDueDate("");
+                }}
               >
                 Cancel
               </button>

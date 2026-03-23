@@ -2,6 +2,8 @@ export type Task = {
   id: string;
   content: string;
   order: number;
+  createdAt: Date;
+  dueDate: Date | null;
 };
 
 export type ColumnType = {

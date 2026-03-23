@@ -5,7 +5,7 @@ import { useState } from "react";
 type CardProps = {
   task: Task;
   index: number;
-  editTask: (taskId: string, taskContent: string) => void;
+  editTask: (taskId: string, taskContent: string, dueDate: Date | null) => void;
   deleteTaskInColumn: (taskId: string) => void;
 };
 
@@ -19,6 +19,9 @@ export default function Card({
   const [isEditing, setIsEditing] = useState(false);
   // Task Content
   const [taskContent, setTaskContent] = useState(task.content);
+  const [taskDueDate, setTaskDueDate] = useState(
+    task.dueDate ? task.dueDate.toISOString().split("T")[0] : "",
+  );
 
   return (
     <Draggable draggableId={task.id} index={index}>
@@ -37,11 +40,21 @@ export default function Card({
                 value={taskContent}
                 className="bg-white w-full"
               />
+              <input
+                type="date"
+                onChange={(e) => setTaskDueDate(e.target.value)}
+                value={taskDueDate}
+                className="bg-white w-full"
+              />
               <div className="flex">
                 <button
                   className="flex-1"
                   onClick={() => {
-                    editTask(task.id, taskContent);
+                    editTask(
+                      task.id,
+                      taskContent,
+                      taskDueDate ? new Date(taskDueDate) : null,
+                    );
                     setIsEditing(false);
                   }}
                 >
@@ -52,6 +65,11 @@ export default function Card({
                   onClick={() => {
                     setIsEditing(false);
                     setTaskContent(task.content);
+                    setTaskDueDate(
+                      task.dueDate
+                        ? task.dueDate.toISOString().split("T")[0]
+                        : "",
+                    );
                   }}
                 >
                   Cancel

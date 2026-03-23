@@ -10,20 +10,22 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model Column {
-  id String @id @default(cuid())
+  id    String @id @default(cuid())
   title String
   order Int
   tasks Task[]
 }
 
 model Task {
-  id String @id @default(cuid())
-  content String
-  order Int
-  columnId String
-  column Column @relation(fields: [columnId], references: [id])
+  id        String    @id @default(cuid())
+  content   String
+  order     Int
+  columnId  String
+  column    Column    @relation(fields: [columnId], references: [id])
+  createdAt DateTime  @default(now())
+  dueDate   DateTime?
 }

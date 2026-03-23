@@ -1,5 +1,5 @@
 # Project Tracker
-A lightweight project management tool to organize tasks and track progress on a Kanban board.
+A full-stack project management application built as a portfolio project — focusing on real-world engineering decisions, not just working code.
 
 ## Tech Stack
 | Tech | Why |
@@ -70,9 +70,15 @@ prisma/
 2. User types content and clicks save — the new task appears at the bottom of the column.
 
 ## Roadmap
+
 - **Stage 1** - UI foundation: layout, kanban board, drag-and-drop ✅
 - **Stage 2** - CRUD operations: add, edit, delete tasks ✅
 - **Stage 3** - Database persistence: Prisma + Neon, Server Actions ✅
-- **Stage 4** - Dashboard with task analytics
-- **Stage 5** - User authentication (Clerk)
-- **Stage 6** - Deployment to Vercel
+- **Stage 4** - Task data enrichment: due dates, priorities, labels, richer task details
+- **Stage 5** - Deployment to Vercel
+- **Stage 6** - Search and filtering: keyword search, filter by status/priority/due date/label, highlight overdue
+- **Stage 7** - Dashboard and analytics: task counts, completion rate, overdue tasks, workflow trends
+- **Stage 8** - Multi-board support and configurable columns: create/rename/delete boards and columns, custom workflows per board
+- **Stage 9** - Authentication: personal boards, user accounts
+
+See [DEVLOG.md](./DEVLOG.md) for decisions, trade-offs, and lessons learned along the way.

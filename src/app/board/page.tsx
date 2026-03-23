@@ -24,6 +24,8 @@ export default async function Page() {
         id: task.id,
         content: task.content,
         order: task.order,
+        createdAt: task.createdAt,
+        dueDate: task.dueDate,
       };
     });
     return acc;

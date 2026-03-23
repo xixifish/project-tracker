@@ -1,7 +1,11 @@
 "use server";
 import prisma from "@/src/lib/prisma";
 
-export async function addTask(taskContent: string, columnId: string) {
+export async function addTask(
+  taskContent: string,
+  columnId: string,
+  dueDate: Date | null,
+) {
   const taskNum = await prisma.task.count({ where: { columnId } });
 
   await prisma.task.create({
@@ -9,6 +13,7 @@ export async function addTask(taskContent: string, columnId: string) {
       content: taskContent,
       order: taskNum + 1,
       columnId: columnId,
+      dueDate: dueDate,
     },
   });
 }
@@ -17,10 +22,14 @@ export async function deleteTask(taskId: string) {
   await prisma.task.delete({ where: { id: taskId } });
 }
 
-export async function editTask(taskId: string, taskContent: string) {
+export async function editTask(
+  taskId: string,
+  taskContent: string,
+  dueDate: Date | null,
+) {
   await prisma.task.update({
     where: { id: taskId },
-    data: { content: taskContent },
+    data: { content: taskContent, dueDate: dueDate },
   });
 }
 

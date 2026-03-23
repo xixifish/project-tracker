@@ -100,11 +100,17 @@ export default function Board({ initialData }: { initialData: StateData }) {
     );
   };
 
-  function addTask(taskContent: string, columnId: string) {
+  function addTask(
+    taskContent: string,
+    columnId: string,
+    dueDate: Date | null,
+  ) {
     const newTask: Task = {
       id: crypto.randomUUID(),
       content: taskContent,
       order: board.columns[columnId].taskIds.length + 1,
+      createdAt: new Date(),
+      dueDate: dueDate,
     };
     const newTaskIds = [...board.columns[columnId].taskIds];
     newTaskIds.push(newTask.id);
@@ -128,13 +134,14 @@ export default function Board({ initialData }: { initialData: StateData }) {
     setBoard(newState);
 
     // Update database
-    addTaskToDb(taskContent, columnId);
+    addTaskToDb(taskContent, columnId, dueDate);
   }
 
-  function editTask(taskId: string, taskContent: string) {
+  function editTask(taskId: string, taskContent: string, dueDate: Date | null) {
     const updatedTask: Task = {
       ...board.tasks[taskId],
       content: taskContent,
+      dueDate: dueDate,
     };
 
     const newTasks: Record<string, Task> = {
@@ -145,7 +152,7 @@ export default function Board({ initialData }: { initialData: StateData }) {
     setBoard(newState);
 
     // Update database
-    editTaskToDb(taskId, taskContent);
+    editTaskToDb(taskId, taskContent, dueDate);
   }
 
   function deleteTask(columnId: string, taskId: string) {
