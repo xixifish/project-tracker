@@ -182,7 +182,7 @@ export default function Board({ initialData }: { initialData: StateData }) {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="flex gap-1 h-screen">
+      <div className="flex overflow-x-auto gap-3 h-screen">
         {board.columnOrder.map((columnId) => {
           const column: ColumnType = board.columns[columnId];
           const tasks: Task[] = column.taskIds.map(

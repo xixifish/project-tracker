@@ -36,8 +36,8 @@ export default function Column({
   }
 
   return (
-    <div className="flex-1 bg-orange-100 p-2">
-      <h1 className="text-2xl font-bold">{column.title}</h1>
+    <div className=" bg-orange-100 pt-4 p-2 w-80 rounded-lg">
+      <h1 className="text-center text-xl font-bold mb-3">{column.title}</h1>
       <Droppable droppableId={column.id}>
         {(provided, _snapshot) => (
           <ul

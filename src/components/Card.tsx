@@ -27,7 +27,7 @@ export default function Card({
     <Draggable draggableId={task.id} index={index}>
       {(provided, _snapshot) => (
         <div
-          className="relative items-center bg-white p-4 rounded-xl group"
+          className="relative items-center bg-white p-4 rounded-lg group shadow-xs"
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
