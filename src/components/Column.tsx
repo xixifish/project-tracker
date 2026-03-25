@@ -41,7 +41,7 @@ export default function Column({
       <Droppable droppableId={column.id}>
         {(provided, _snapshot) => (
           <ul
-            className="flex flex-col gap-2"
+            className="flex flex-col gap-2 min-h-8"
             ref={provided.innerRef}
             // style={{
             //   backgroundColor: snapshot.isDraggingOver ? "white" : "blue",

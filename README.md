@@ -57,13 +57,13 @@ prisma/
 
 ### User Interactions
 **Edit task**
-1. User hovers on a card — edit and delete buttons appear.
-2. User clicks edit — task content becomes an inline input with save and cancel buttons.
-3. User clicks save — changes are applied. Cancel discards the edit and restores the original content.
+1. User hovers on a card — background highlights and cursor changes to pointer.
+2. User clicks the card — an inline edit form appears with task content and due date inputs.
+3. User edits and clicks Save, or presses Enter — changes are applied.
 
 **Delete task**
-1. User hovers on a card — edit and delete buttons appear.
-2. User clicks delete — the task is removed from the column immediately.
+1. User hovers on a card — a trash icon appears in the top-right corner.
+2. User clicks the icon — the task is removed from the column immediately.
 
 **Add task**
 1. User clicks "Add Task" at the bottom of a column — an inline form appears.

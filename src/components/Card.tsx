@@ -1,6 +1,7 @@
 import { Draggable } from "@hello-pangea/dnd";
 import { Task } from "../types/types";
 import { useState } from "react";
+import { X } from "lucide-react";
 
 type CardProps = {
   task: Task;
@@ -27,10 +28,17 @@ export default function Card({
     <Draggable draggableId={task.id} index={index}>
       {(provided, _snapshot) => (
         <div
-          className="relative items-center bg-white p-4 rounded-lg group shadow-xs"
+          className={`relative items-center bg-white p-4 rounded-lg group shadow-xs ${!isEditing ? "hover:bg-gray-100" : ""}`}
+          onClick={() => {
+            if (!isEditing) setIsEditing(true);
+          }}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          style={{
+            ...provided.draggableProps.style,
+            cursor: isEditing ? "default" : "pointer",
+          }}
         >
           {isEditing ? (
             <div className="flex-col bg-amber-300 mt-2 p-2">
@@ -79,15 +87,24 @@ export default function Card({
           ) : (
             <div className="flex">{task.content}</div>
           )}
-          <div className="absolute top-0.5 right-1 hidden group-hover:flex">
-            <button
+          <div
+            className={`absolute top-0.5 right-1 hidden ${!isEditing ? "group-hover:flex" : ""}`}
+          >
+            {/*<button
               onClick={() => {
                 setIsEditing(true);
               }}
             >
               Edit
+            </button>*/}
+            <button
+              onClick={(e) => {
+                deleteTaskInColumn(task.id);
+                e.stopPropagation();
+              }}
+            >
+              <X size={16} />
             </button>
-            <button onClick={() => deleteTaskInColumn(task.id)}>Delete</button>
           </div>
         </div>
       )}
