@@ -2,6 +2,7 @@ import { Task, ColumnType } from "../types/types";
 import Card from "./Card";
 import { Droppable } from "@hello-pangea/dnd";
 import { useState } from "react";
+import TaskForm from "./TaskForm";
 
 type ColumnProps = {
   column: ColumnType;
@@ -26,9 +27,7 @@ export default function Column({
   editTask,
   deleteTask,
 }: ColumnProps) {
-  const [taskContent, setTaskContent] = useState("");
   // When the taskDueDate is empty, new Date("") can generate correct type
-  const [taskDueDate, setTaskDueDate] = useState("");
   const [formIsOpen, setFormIsOpen] = useState(false);
 
   function deleteTaskInColumn(taskId: string) {
@@ -65,48 +64,21 @@ export default function Column({
       </Droppable>
       <div>
         {formIsOpen ? (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
+          <TaskForm
+            initialContent=""
+            initialDueDate=""
+            onSubmit={(taskContent, taskDueDate) => {
               addTask(
                 taskContent,
                 column.id,
                 taskDueDate ? new Date(taskDueDate) : null,
               );
               setFormIsOpen(false);
-              setTaskContent("");
-              setTaskDueDate("");
             }}
-            className="flex-col bg-amber-300 mt-2 p-2"
-          >
-            <input
-              type="text"
-              value={taskContent}
-              onChange={(e) => setTaskContent(e.target.value)}
-              className="bg-white w-full"
-            />
-            <input
-              type="date"
-              value={taskDueDate}
-              onChange={(e) => setTaskDueDate(e.target.value)}
-              className="bg-white w-full"
-            />
-            <div className="flex">
-              <button type="submit" className="flex-1">
-                Save
-              </button>
-              <button
-                type="button"
-                className="flex-1"
-                onClick={() => {
-                  setFormIsOpen(false);
-                  setTaskDueDate("");
-                }}
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
+            onCancel={() => {
+              setFormIsOpen(false);
+            }}
+          />
         ) : (
           <button onClick={() => setFormIsOpen(true)}>Add Task</button>
         )}

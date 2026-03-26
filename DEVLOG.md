@@ -66,12 +66,44 @@ String state for date inputs - kept `taskDueDate` as a string inside components 
 - Optimistic task objects must satisfy the full TypeScript type, even for fields like `createdAt` that the DB sets automatically
 
 ### What's next
-- UI polish: column widths, horizontal scroll, improved add/edit form layout
+- UI polish: column widths, horizontal scroll, improved interaction of adding/editing tasks
 
 
+## 2026-03-24 — Improve Column and Card experience
 
+### What I built
+- Click-to-edit interaction on cards - clicking anywhere on a card enters edit mode (replacing the old explicit "Edit" button)
+- Replace the old delete button with an X icon (lucide-react), hidden while editing
+- UI polish: fixed column width(`w-80`), rounded columns, centered/smaller column title, card `shadow-xs`
 
+### Problem I solved
+When the card div has an onClick to open edit mode, the delete button inside it also fires that handler. Fixed with `e.stopPropagation()` on the delete button.
 
+### What's next
+Extract shared TaskForm component used by both add and edit flows
+
+## 2026-03-26 — Extract `TaskForm` component
+
+### What I built
+- Extracted a shared `TaskForm` component used by both add (in Column) and edit (in Card)
+- Removed duplicated form code from both components
+
+### What I learned
+- `initialContent` and `initialDueDate` are optional props, so TypeScript inferred state as `string | undefined` - fixed by providing default values in destructred parameters
+- `onSubmit` signature mismatch: `TaskForm` passes (content, dueDate) but `editTask` needs `taskId` too - solved with a wrapper arrow function in `Card` that captures `task.id` from the outer scope
+- Empty string passed to `new Date("")` produces an invalid Date - guarded with a ternary before converting
+  
+### What's next
+- UI polish on `TaskForm` layout
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 ## Template for future entries
 
