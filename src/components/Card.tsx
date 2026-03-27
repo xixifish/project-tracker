@@ -1,7 +1,7 @@
 import { Draggable } from "@hello-pangea/dnd";
 import { Task } from "../types/types";
 import { useState } from "react";
-import { X } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import TaskForm from "./TaskForm";
 
 type CardProps = {
@@ -24,7 +24,10 @@ export default function Card({
     <Draggable draggableId={task.id} index={index}>
       {(provided, _snapshot) => (
         <div
-          className={`relative items-center bg-white p-4 rounded-lg group shadow-xs ${!isEditing ? "hover:bg-gray-100" : ""}`}
+          className={`relative
+            items-center
+            p-3 rounded-lg group shadow-sm hover:shadow-none
+            ${!isEditing ? "hover:bg-[#E7EAF9] bg-white" : "bg-[#E7EAF9]"}`}
           onClick={() => {
             if (!isEditing) setIsEditing(true);
           }}
@@ -64,7 +67,7 @@ export default function Card({
                 e.stopPropagation();
               }}
             >
-              <X size={16} className="cursor-pointer" />
+              <Trash2 size={16} className="cursor-pointer hover:text-red-700" />
             </button>
           </div>
         </div>

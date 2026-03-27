@@ -95,9 +95,24 @@ Extract shared TaskForm component used by both add and edit flows
   
 ### What's next
 - UI polish on `TaskForm` layout
-  
-  
-  
+
+## 2026-03-27 — UI polish on `TaskForm` layout
+
+### What I built
+- Polished `TaskForm` UI
+- Keyboard shortcuts: Enter to save, Escapte to cancel
+- Auto-fucus `textarea` when TaskForm opens
+
+### What I learned
+- Escape key doesn't bubble up to parent elements - had to handle it directly on the input element rather than form
+- `useRef(null)` infers type as never - fixed by explicitly typing it as `useRef<HTMLTextAreaElement>(null)`
+
+### What's next
+- Display due date on the card
+
+### Future task
+- [ ] Replace the native date input with a third-party date picker for better customisation
+- [ ] If the content of the task is empty, saving task should do nothing, just return
   
   
   

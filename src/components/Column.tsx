@@ -35,12 +35,12 @@ export default function Column({
   }
 
   return (
-    <div className=" bg-orange-100 pt-4 p-2 w-80 rounded-lg">
+    <div className=" bg-[#F6F8FF] pt-4 p-2 w-80 rounded-xl">
       <h1 className="text-center text-xl font-bold mb-3">{column.title}</h1>
       <Droppable droppableId={column.id}>
         {(provided, _snapshot) => (
           <ul
-            className="flex flex-col gap-2 min-h-8"
+            className="flex flex-col gap-2.5 min-h-8"
             ref={provided.innerRef}
             // style={{
             //   backgroundColor: snapshot.isDraggingOver ? "white" : "blue",
@@ -64,23 +64,34 @@ export default function Column({
       </Droppable>
       <div>
         {formIsOpen ? (
-          <TaskForm
-            initialContent=""
-            initialDueDate=""
-            onSubmit={(taskContent, taskDueDate) => {
-              addTask(
-                taskContent,
-                column.id,
-                taskDueDate ? new Date(taskDueDate) : null,
-              );
-              setFormIsOpen(false);
-            }}
-            onCancel={() => {
-              setFormIsOpen(false);
-            }}
-          />
+          <div
+            className={`
+            items-center
+            p-3 rounded-lg bg-[#E7EAF9] group mt-2.5`}
+          >
+            <TaskForm
+              initialContent=""
+              initialDueDate=""
+              onSubmit={(taskContent, taskDueDate) => {
+                addTask(
+                  taskContent,
+                  column.id,
+                  taskDueDate ? new Date(taskDueDate) : null,
+                );
+                setFormIsOpen(false);
+              }}
+              onCancel={() => {
+                setFormIsOpen(false);
+              }}
+            />
+          </div>
         ) : (
-          <button onClick={() => setFormIsOpen(true)}>Add Task</button>
+          <button
+            className="text-[#4A66F4] cursor-pointer rounded-lg w-full mt-2 font-bold pt-2 pb-2 hover:bg-[#E7EAF9]"
+            onClick={() => setFormIsOpen(true)}
+          >
+            + Add Task
+          </button>
         )}
       </div>
     </div>
