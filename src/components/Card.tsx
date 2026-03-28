@@ -56,7 +56,15 @@ export default function Card({
               }}
             />
           ) : (
-            <div className="flex">{task.content}</div>
+            <div className="flex-col">
+              <div>{task.content}</div>
+              <div>
+                {task.dueDate?.toLocaleDateString(undefined, {
+                  day: "numeric",
+                  month: "short",
+                })}
+              </div>
+            </div>
           )}
           <div
             className={`absolute top-2 right-2 hidden ${!isEditing ? "group-hover:flex" : ""}`}
