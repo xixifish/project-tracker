@@ -1,7 +1,7 @@
 import { Draggable } from "@hello-pangea/dnd";
 import { Task } from "../types/types";
 import { useState } from "react";
-import { Trash2 } from "lucide-react";
+import { Trash2, AlarmClock } from "lucide-react";
 import TaskForm from "./TaskForm";
 
 type CardProps = {
@@ -58,12 +58,17 @@ export default function Card({
           ) : (
             <div className="flex-col">
               <div>{task.content}</div>
-              <div>
-                {task.dueDate?.toLocaleDateString(undefined, {
-                  day: "numeric",
-                  month: "short",
-                })}
-              </div>
+              {task.dueDate ? (
+                <div className="inline-flex items-center rounded-sm  bg-[#F0F0F0] w-auto p-1 mt-2">
+                  <AlarmClock size={16} />
+                  <div className="text-sm ml-1">
+                    {task.dueDate?.toLocaleDateString(undefined, {
+                      day: "numeric",
+                      month: "short",
+                    })}
+                  </div>
+                </div>
+              ) : null}
             </div>
           )}
           <div

@@ -33,6 +33,13 @@ export async function editTask(
   });
 }
 
+export async function editColumn(columnId: string, columnTitle: string) {
+  await prisma.column.update({
+    where: { id: columnId },
+    data: { title: columnTitle },
+  });
+}
+
 export async function moveTask(
   taskId: string,
   fromColumnId: string,

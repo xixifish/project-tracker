@@ -9,6 +9,7 @@ import {
   editTask as editTaskToDb,
   deleteTask as deleteTaskToDb,
   moveTask as moveTaskToDb,
+  editColumn as editColumnToDb,
 } from "./actions";
 
 export default function Board({ initialData }: { initialData: StateData }) {
@@ -155,6 +156,22 @@ export default function Board({ initialData }: { initialData: StateData }) {
     editTaskToDb(taskId, taskContent, dueDate);
   }
 
+  function editColumn(columnId: string, columnTitle: string) {
+    const updatedColumn: ColumnType = {
+      ...board.columns[columnId],
+      title: columnTitle,
+    };
+    const newColumns: Record<string, ColumnType> = {
+      ...board.columns,
+      [columnId]: updatedColumn,
+    };
+    const newState = { ...board, columns: newColumns };
+    setBoard(newState);
+
+    //Update datebase
+    editColumnToDb(columnId, columnTitle);
+  }
+
   function deleteTask(columnId: string, taskId: string) {
     // Remove the task from the taskIds of the column
     const newTaskIds = [...board.columns[columnId].taskIds];
@@ -197,6 +214,7 @@ export default function Board({ initialData }: { initialData: StateData }) {
               addTask={addTask}
               editTask={editTask}
               deleteTask={deleteTask}
+              editColumn={editColumn}
             />
           );
         })}

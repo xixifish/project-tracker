@@ -1,11 +1,12 @@
 import { Task, ColumnType } from "../types/types";
 import Card from "./Card";
 import { Droppable } from "@hello-pangea/dnd";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import TaskForm from "./TaskForm";
 
 type ColumnProps = {
   column: ColumnType;
+  editColumn: (columnId: string, columnTitle: string) => void;
   tasks: Task[];
   addTask: (
     taskContent: string,
@@ -22,6 +23,7 @@ type ColumnProps = {
 
 export default function Column({
   column,
+  editColumn,
   tasks,
   addTask,
   editTask,
@@ -29,6 +31,11 @@ export default function Column({
 }: ColumnProps) {
   // When the taskDueDate is empty, new Date("") can generate correct type
   const [formIsOpen, setFormIsOpen] = useState(false);
+  const [titleEditing, setTitleEditing] = useState(false);
+  const [titleInput, setTitleInput] = useState(column.title);
+  // Add a ref to track whether the edit was already handled by a key press
+  // In onBlur, only proceed if the key hasn't done it
+  const skipBlur = useRef(false);
 
   function deleteTaskInColumn(taskId: string) {
     deleteTask(column.id, taskId);
@@ -36,7 +43,43 @@ export default function Column({
 
   return (
     <div className=" bg-[#F6F8FF] pt-4 p-2 w-80 rounded-xl">
-      <h1 className="text-center text-xl font-bold mb-3">{column.title}</h1>
+      <div
+        onClick={() => {
+          setTitleEditing(true);
+          setTitleInput(column.title);
+        }}
+      >
+        {titleEditing ? (
+          <input
+            type="text"
+            value={titleInput}
+            onChange={(e) => setTitleInput(e.target.value)}
+            onBlur={() => {
+              if (skipBlur.current) {
+                skipBlur.current = false;
+                return;
+              } else {
+                editColumn(column.id, titleInput);
+                setTitleEditing(false);
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                skipBlur.current = true;
+                editColumn(column.id, titleInput);
+                e.preventDefault();
+                setTitleEditing(false);
+              }
+              if (e.key === "Escape") {
+                skipBlur.current = true;
+                setTitleEditing(false);
+              }
+            }}
+          />
+        ) : (
+          <h1 className="text-center text-xl font-bold mb-3">{column.title}</h1>
+        )}
+      </div>
       <Droppable droppableId={column.id}>
         {(provided, _snapshot) => (
           <ul
